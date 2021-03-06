@@ -1,0 +1,66 @@
+# By Khroners
+version: '2'
+services:
+  traefik:
+    image: traefik:2.4.6 #don't use latest tag
+    container_name: traefik
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /apps/traefik/traefik.yml:/etc/traefik/traefik.yml:ro
+      - /apps/traefik/config/:/etc/traefik/config/:ro
+# Uncomment this line if not using own certificate
+#      - /apps/traefik/acme.json:/acme.json
+      - /etc/letsencrypt/archive/khroners.fr-0001/:/certs:ro # Edit the path of your certificates
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.traefik.entrypoints=http
+      - traefik.http.routers.traefik.rule=Host("traefik.khroners.fr")
+      - traefik.http.middlewares.traefik-auth.basicauth.users=admin:{SHA}0DPiKuNIrrVmD8IUCuw1hQxNqZc=
+      - traefik.http.middlewares.traefik-https-redirect.redirectscheme.scheme=https
+      - traefik.http.routers.traefik.middlewares=traefik-https-redirect
+      - traefik.http.routers.traefik-secure.entrypoints=https
+      - traefik.http.routers.traefik-secure.rule=Host("traefik.khroners.fr")
+      - traefik.http.routers.traefik-secure.middlewares=traefik-auth
+      - traefik.http.routers.traefik-secure.tls=true
+# Uncomment this line if not using own certificate
+#      - traefik.http.routers.traefik-secure.tls.certresolver=http
+      - traefik.http.routers.traefik-secure.service=api@internal
+  portainer:
+    image: portainer/portainer-ce:2.1.1 #don't use latest. check Docker-hub
+    container_name: portainer
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    networks:
+      - proxy
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /apps/portainer/data:/data #edit /apps/portainer/data to the path you want 
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.portainer.entrypoints=http
+      - traefik.http.routers.portainer.rule=Host("portainer.khroners.fr")
+      - traefik.http.middlewares.portainer-https-redirect.redirectscheme.scheme=https
+      - traefik.http.routers.portainer.middlewares=portainer-https-redirect
+      - traefik.http.routers.portainer-secure.entrypoints=https
+      - traefik.http.routers.portainer-secure.rule=Host("portainer.khroners.fr")
+      - traefik.http.routers.portainer-secure.tls=true
+# Uncomment this line if not using own certificate
+#      - traefik.http.routers.portainer-secure.tls.certresolver=http
+      - traefik.http.routers.portainer-secure.service=portainer
+      - traefik.http.services.portainer.loadbalancer.server.port=9000
+      - traefik.docker.network=proxy
+
+networks:
+  proxy:
+    external: true
