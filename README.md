@@ -10,7 +10,7 @@ https://gf.dev/
 ![Geekflare Header Test](https://user-images.githubusercontent.com/75507405/110218755-b07e8d80-7ebb-11eb-99df-be420dd9548e.png)
 
 
-#How to use
+# How to use
 ```bash
 git clone https://github.com/Khroners/Traefik-with-A-plus-on-SSL-Labs-Headers
 ```
