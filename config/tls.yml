@@ -1,0 +1,32 @@
+# Dynamic configuration
+# by Khroners 
+tls:
+  options:
+    default:
+      minVersion: VersionTLS12
+      sniStrict: true
+      cipherSuites:
+        - TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384 # TLS 1.2
+        - TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305  # TLS 1.2
+        - TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384   # TLS 1.2
+        - TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305    # TLS 1.2
+        - TLS_AES_256_GCM_SHA384                  # TLS 1.3
+        - TLS_CHACHA20_POLY1305_SHA256            # TLS 1.3
+        - TLS_FALLBACK_SCSV                       # TLS FALLBACK
+      curvePreferences:
+        - secp521r1
+        - secp384r1
+    modern:
+      minVersion: VersionTLS13
+
+# Comment below if not using own certificate
+  certificates:
+    - certFile: "/certs/fullchain2.pem" #certificate path in the container
+      keyfile: "/certs/privkey2.pem" #private key path in the container
+      stores:
+        - default
+  stores:
+    default:
+      defaultCertificate:
+        certFile: "/certs/fullchain2.pem" #certificate path in the container
+        keyFile: "/certs/privkey2.pem" #private key path in the container
