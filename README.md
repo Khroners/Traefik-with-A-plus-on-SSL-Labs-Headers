@@ -1,4 +1,4 @@
-# Traefik-with-A+-on-SSL-Labs-Headers-
+# Traefik-with-A+-on-SSL-Labs-Headers
 Traefik on Docker, with A+ on SSLLABS and Header
 
 https://www.ssllabs.com/ssltest/
