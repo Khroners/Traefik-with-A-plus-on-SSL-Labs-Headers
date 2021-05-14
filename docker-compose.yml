@@ -1,8 +1,8 @@
 # By Khroners
-version: '2'
+version: '3'
 services:
   traefik:
-    image: traefik:2.4.6 #don't use latest tag
+    image: traefik:2.4.8 #don't use latest tag
     container_name: traefik
     restart: unless-stopped
     security_opt:
