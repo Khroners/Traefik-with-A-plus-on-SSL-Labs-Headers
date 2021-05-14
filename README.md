@@ -14,7 +14,8 @@ https://gf.dev/
 ```bash
 git clone https://github.com/Khroners/Traefik-with-A-plus-on-SSL-Labs-Headers
 ```
-Then, edit the docker-compose.yml file and Traefik's configuration files.
+Then, edit the docker-compose.yml file and Traefik's configuration files (image tag, volumes, certificates, etc).
 ```bash
+cd Traefik-with-A-plus-on-SSL-Labs-Headers/
 docker-compose up -d
 ```
