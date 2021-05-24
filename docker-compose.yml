@@ -35,7 +35,7 @@ services:
 #      - traefik.http.routers.traefik-secure.tls.certresolver=http
       - traefik.http.routers.traefik-secure.service=api@internal
   portainer:
-    image: portainer/portainer-ce:2.1.1 #don't use latest. check Docker-hub
+    image: portainer/portainer-ce:2.5.0 #don't use latest. check Docker-hub
     container_name: portainer
     restart: unless-stopped
     security_opt:
