@@ -12,9 +12,7 @@ providers:
   file:
     directory: /etc/traefik/config/
     watch: true
-
 #uncomment if not using own certificate
-
 #certificatesResolvers:
 #  http:
 #    acme:
