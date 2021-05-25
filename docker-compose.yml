@@ -19,6 +19,7 @@ services:
       - /apps/traefik/config/:/etc/traefik/config/:ro
 # Uncomment this line if not using own certificate
 #      - /apps/traefik/acme.json:/acme.json
+# Comment this line if not using own certificate
       - /etc/letsencrypt/archive/exemple.com-0001/:/certs:ro # Edit the path of your certificates
     labels:
       - traefik.enable=true
@@ -60,7 +61,6 @@ services:
       - traefik.http.routers.portainer-secure.service=portainer
       - traefik.http.services.portainer.loadbalancer.server.port=9000
       - traefik.docker.network=proxy
-
 networks:
   proxy:
     external: true
