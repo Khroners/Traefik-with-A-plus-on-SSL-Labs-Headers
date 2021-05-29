@@ -5,6 +5,8 @@ entryPoints:
     address: ":80"
   https:
     address: ":443"
+  ssh:
+    address: ":2025"
 providers:
   docker:
     endpoint: "unix:///var/run/docker.sock"
