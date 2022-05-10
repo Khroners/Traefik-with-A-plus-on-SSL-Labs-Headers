@@ -1,8 +1,8 @@
 # By Khroners
-version: '3.8'
+version: '3.9'
 services:
   traefik:
-    image: traefik:2.4.8 #don't use latest tag
+    image: traefik:2.6 #don't use latest tag
     container_name: traefik
     restart: unless-stopped
     security_opt:
@@ -36,7 +36,7 @@ services:
 #      - traefik.http.routers.traefik-secure.tls.certresolver=http
       - traefik.http.routers.traefik-secure.service=api@internal
   portainer:
-    image: portainer/portainer-ce:2.5.0 #don't use latest. check Docker-hub
+    image: portainer/portainer-ce:2.13.0-alpine #don't use latest. check Docker-hub
     container_name: portainer
     restart: unless-stopped
     security_opt:
